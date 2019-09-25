@@ -25,5 +25,10 @@ namespace Singleton
         {
             Console.WriteLine("SomeBusinessLogic");
         }
+
+        public void SomeBusinessLogic2()
+        {
+            Console.WriteLine("SomeBusinessLogic");
+        }
     }
 }

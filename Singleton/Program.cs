@@ -85,17 +85,17 @@ namespace Singleton
             Console.WriteLine("TestSingletonThreadSafe");
             Thread process1 = new Thread(() =>
             {
-                //SingletonThreadSafe s1 = SingletonThreadSafe.GetInstance("Foo");
-                //Console.WriteLine(s1.Value);
-                Singleton s1 = Singleton.GetInstance();
-                s1.SomeBusinessLogic();
+                SingletonThreadSafe s1 = SingletonThreadSafe.GetInstance("Foo");
+                Console.WriteLine(s1.Value);
+                //Singleton s1 = Singleton.GetInstance();
+                //s1.SomeBusinessLogic();
             });
             Thread process2 = new Thread(() =>
             {
-                //SingletonThreadSafe s2 = SingletonThreadSafe.GetInstance("bar");
-                //Console.WriteLine(s2.Value);
-                Singleton s2 = Singleton.GetInstance();
-                s2.SomeBusinessLogic();
+                SingletonThreadSafe s2 = SingletonThreadSafe.GetInstance("bar");
+                Console.WriteLine(s2.Value);
+                //Singleton s2 = Singleton.GetInstance();
+                //s2.SomeBusinessLogic();
             });
 
             process1.Start();
@@ -111,15 +111,15 @@ namespace Singleton
             Console.Clear();
             Console.WriteLine("WriteLog");
             LogFile log1 = new LogFile(_fileName);
-            //LogFile log2 = new LogFile(_fileName);
+            LogFile log2 = new LogFile(_fileName);
             
             log1.SaveMessage(LogType.Error, "Error 1");
             log1.SaveMessage(LogType.System, "System 1");
             log1.SaveMessage(LogType.Warning, "Warning 1");
             
-            //log2.SaveMessage(LogType.Error, "Error 2");
-            //log2.SaveMessage(LogType.System, "System 2");
-            //log2.SaveMessage(LogType.Warning, "Warning 2");
+            log2.SaveMessage(LogType.Error, "Error 2");
+            log2.SaveMessage(LogType.System, "System 2");
+            log2.SaveMessage(LogType.Warning, "Warning 2");
 
             Wait();
         }
@@ -128,8 +128,8 @@ namespace Singleton
         {
             Console.Clear();
             Console.WriteLine("WriteLogSingleton");
-            LogFile log1 = new LogFile(_fileName);
-            LogFile log2 = new LogFile(_fileName);
+            LogfileSingleton log1 = LogfileSingleton.GetInstance(_fileName);
+            LogfileSingleton log2 = LogfileSingleton.GetInstance(_fileName);
 
             log1.SaveMessage(LogType.Error, "Error 1");
             log1.SaveMessage(LogType.System, "System 1");
